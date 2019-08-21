@@ -9,6 +9,7 @@ const {
 } = graphql
 const _ = require('lodash')
 const axios = require('axios')
+const availableSlotUtils = require('../utils/availableSlotUtils')
 
 const AvailableSlotType = new GraphQLObjectType({
   name: 'AvailableSlot',
@@ -46,21 +47,30 @@ const RootQuery = new GraphQLObjectType({
           .then(response => _.get(response, 'data'))
       },
     },
-    availableSlot: {
-      type: AvailableSlotType,
-      args: { id: { type: GraphQLInt } },
-      resolve(parentValue, args) {
-        return axios
-          .get(`http://localhost:3000/availableSlots/${_.get(args, 'id')}`)
-          .then(response => _.get(response, 'data'))
-      },
-    },
     availableSlots: {
       type: new GraphQLNonNull(new GraphQLList(AvailableSlotType)),
+      args: { consultantType: { type: GraphQLString } },
       resolve(parentValue, args) {
         return axios
           .get(`http://localhost:3000/availableSlots`)
           .then(response => _.get(response, 'data'))
+          .then(availableSlots =>
+            availableSlotUtils.getSlotsByConsultantType(
+              _.get(args, 'consultantType'),
+              availableSlots
+            )
+          )
+      },
+    },
+    consultantTypes: {
+      type: new GraphQLNonNull(new GraphQLList(GraphQLString)),
+      resolve(parentValue, args) {
+        return axios
+          .get(`http://localhost:3000/availableSlots`)
+          .then(response => _.get(response, 'data'))
+          .then(availableSlots =>
+            availableSlotUtils.getUniqueConsultantTypes(availableSlots)
+          )
       },
     },
   },
