@@ -1,0 +1,13 @@
+{
+  "name": "data",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Jan-Christiaan Basson",
+  "license": "MIT",
+  "dependencies": {
+    "json-server": "^0.15.0"
+  },
+  "scripts": {
+    "json:server": "json-server --watch data.json"
+  }
+}
