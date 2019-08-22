@@ -8,7 +8,7 @@ const {
   GraphQLList,
 } = graphql
 const _ = require('lodash')
-const axios = require('axios')
+const httpService = require('../service/httpService')
 const availableSlotUtils = require('../utils/availableSlotUtils')
 
 const AvailableSlotType = new GraphQLObjectType({
@@ -41,36 +41,28 @@ const RootQuery = new GraphQLObjectType({
     user: {
       type: UserType,
       args: { id: { type: GraphQLInt } },
-      resolve(parentValue, args) {
-        return axios
-          .get(`http://localhost:3000/users/${_.get(args, 'id')}`)
-          .then(response => _.get(response, 'data'))
+      resolve: async (parentValue, args) => {
+        return await httpService.getUser(_.get(args, 'id'))
       },
     },
     availableSlots: {
       type: new GraphQLNonNull(new GraphQLList(AvailableSlotType)),
       args: { consultantType: { type: GraphQLString } },
-      resolve(parentValue, args) {
-        return axios
-          .get(`http://localhost:3000/availableSlots`)
-          .then(response => _.get(response, 'data'))
-          .then(availableSlots =>
-            availableSlotUtils.getSlotsByConsultantType(
-              _.get(args, 'consultantType'),
-              availableSlots
-            )
-          )
+      resolve: async (parentValue, args) => {
+        const availableSlots = await httpService.getAvailableSlots()
+
+        return availableSlotUtils.getSlotsByConsultantType(
+          _.get(args, 'consultantType'),
+          availableSlots
+        )
       },
     },
     consultantTypes: {
       type: new GraphQLNonNull(new GraphQLList(GraphQLString)),
-      resolve(parentValue, args) {
-        return axios
-          .get(`http://localhost:3000/availableSlots`)
-          .then(response => _.get(response, 'data'))
-          .then(availableSlots =>
-            availableSlotUtils.getUniqueConsultantTypes(availableSlots)
-          )
+      resolve: async (parentValue, args) => {
+        const availableSlots = await httpService.getAvailableSlots()
+
+        return availableSlotUtils.getUniqueConsultantTypes(availableSlots)
       },
     },
   },
