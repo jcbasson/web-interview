@@ -18,8 +18,14 @@ const getConsultantTypes = () =>
     .get(`${API_ENDPOINT}/availableSlots`)
     .then(response => _.get(response, 'data'))
 
+const makeAppointment = appointment =>
+  axios
+    .post(`${API_ENDPOINT}/appointments`, { ...appointment })
+    .then(response => _.get(response, 'data'))
+
 module.exports = {
   getUser,
   getAvailableSlots,
   getConsultantTypes,
+  makeAppointment,
 }
