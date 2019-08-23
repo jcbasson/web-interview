@@ -1,10 +1,12 @@
 import * as React from 'react'
 import styled from 'styled-components'
+import { User } from '../user';
 
 export const Appointment = () => {
   return (
     <>
       <SubHeader>New appointment</SubHeader>
+      <User id={1}></User>
       <LayoutDivider></LayoutDivider>
       <LayoutDivider></LayoutDivider>
     </>
