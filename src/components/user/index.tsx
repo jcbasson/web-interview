@@ -5,7 +5,7 @@ import { useQuery } from '@apollo/react-hooks';
 import _ from 'lodash';
 import { connect } from 'react-redux';
 
-const GET_USER_QUERY = gql`
+export const GET_USER_QUERY = gql`
   query User($id:Int!){
     user(id: $id){
       id,
@@ -26,9 +26,10 @@ export const UserUI: React.FC<IUser> = ({id}) => {
   });
 
   if (loading) return null;
-  if (error) return (<h2>Error! {error}</h2>);
+  if (error) return (<h2>Error!</h2>);
 
   const {avatar, firstName, lastName} = _.get(data, 'user');
+
   return (
     <UserContainer>
       <AvatarImg src={avatar} alt="User avatar"></AvatarImg>
