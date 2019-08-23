@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { Header } from '../header';
+import { Appointment } from '../appointment';
 
 export const App: React.FC = () => {
 
@@ -10,12 +11,8 @@ export const App: React.FC = () => {
         </LayoutItem>
         <LayoutDivider/>
         <LayoutItem>
-            <SubHeader>New appointment</SubHeader>
+            <Appointment />
         </LayoutItem>
-        <LayoutDivider/>
-        <LayoutItem></LayoutItem>
-        <LayoutDivider/>
-        <LayoutItem></LayoutItem>
         </Layout>)
 }
 
@@ -26,9 +23,8 @@ const Layout = styled.div`
 `;
 
 const LayoutItem = styled.div`
-    width: 100%;
-    padding-left: 5px;
-    padding-right: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
 `;
 
 const LayoutDivider = styled.hr`
@@ -39,11 +35,3 @@ const LayoutDivider = styled.hr`
     background-color:#dddddd;;
     height: 1px;
 `;
-
-const SubHeader = styled.h2`
-    font-size: 24px;
-`;
-
-
-
-
