@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 import _ from 'lodash';
+import { connect } from 'react-redux';
 
 const GET_USER_QUERY = gql`
   query User($id:Int!){
@@ -16,10 +17,10 @@ const GET_USER_QUERY = gql`
 `;
 
 interface IUser {
-    readonly id: number;
+  readonly id: number;
 }
 
-export const User: React.FC<IUser> = ({id}) => {
+export const UserUI: React.FC<IUser> = ({id}) => {
   const { loading, error, data } = useQuery(GET_USER_QUERY, {
     variables: { id },
   });
@@ -35,6 +36,13 @@ export const User: React.FC<IUser> = ({id}) => {
     </UserContainer>
   )
 }
+
+function mapStateToProps(state: any) {
+  const { userID } = state
+  return { id: userID }
+}
+
+export const User = connect(mapStateToProps)(UserUI)
 
 const UserContainer = styled.div`
     display: flex;

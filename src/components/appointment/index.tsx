@@ -6,7 +6,7 @@ export const Appointment = () => {
   return (
     <>
       <SubHeader>New appointment</SubHeader>
-      <User id={1}></User>
+      <User></User>
       <LayoutDivider></LayoutDivider>
       <LayoutDivider></LayoutDivider>
     </>
