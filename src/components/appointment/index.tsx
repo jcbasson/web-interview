@@ -1,6 +1,7 @@
 import * as React from 'react'
 import styled from 'styled-components'
 import { User } from '../user';
+import { ConsultantTypes } from '../consultantTypes';
 
 export const Appointment = () => {
   return (
@@ -8,13 +9,14 @@ export const Appointment = () => {
       <SubHeader>New appointment</SubHeader>
       <User></User>
       <LayoutDivider></LayoutDivider>
+      <ConsultantTypes></ConsultantTypes>
       <LayoutDivider></LayoutDivider>
     </>
   )
 }
 
 const SubHeader = styled.h2`
-  font-size: 24px;
+  font-size: 30px;
 `
 
 const LayoutDivider = styled.hr`
