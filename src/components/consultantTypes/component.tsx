@@ -2,13 +2,12 @@ import * as React from 'react'
 import gql from 'graphql-tag'
 import { useQuery } from '@apollo/react-hooks'
 import _ from 'lodash'
-import { connect } from 'react-redux'
+import { connect, batch } from 'react-redux'
 import { Dispatch } from 'redux';
 import { setConsultantType } from './actions';
 import { Title, ConsultantTypesContainer, ConsultantType } from './styled';
 import { clearTimeSlot } from '../timeSlots';
 import { clearAppointmentType } from '../appointmentTypes'
-import { batch } from 'react-redux'
 
 export const GET_CONSULTANT_TYPES_QUERY = gql`
   query ConsultantTypes {
@@ -45,7 +44,7 @@ export const ConsultantTypesUI: React.FC<IConsultantTypes> = ({
 }
 
 function mapStateToProps(state: any) {
-  const consultantType = _.get(state, 'consultantType.selected', '');
+  const consultantType = _.get(state, 'consultantType', '');
   return { consultantType }
 }
 

@@ -7,6 +7,7 @@ export namespace TimeSlots {
         export interface TimeSlot {
             id : number;
             time: string;
+            displayTime: string;
         }
 
     }

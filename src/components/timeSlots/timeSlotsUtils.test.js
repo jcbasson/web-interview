@@ -15,12 +15,15 @@ describe('timeSlots/utils', () => {
           time: '2019-11-27T10:11:00.000Z',
         },
       ]
-
       const result = formatTimeSlotTimes(timeSlots)
-      console.log('result ', result)
       const expected = [
-        { id: 1, time: 'Wednesday, November 27th 2019, 9:11:00 pm' },
+        {
+          id: 1,
+          displayTime: 'Wednesday, November 27th 2019, 9:11:00 pm',
+          time: '2019-11-27T10:11:00.000Z',
+        },
       ]
+
       expect(result).toEqual(expected)
     })
 

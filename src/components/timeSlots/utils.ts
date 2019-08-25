@@ -15,6 +15,6 @@ const formatTime: TimeSlots.Utils.FormatTime = (timeSlot) => {
 
     return {
         ...timeSlot,
-        time: formattedTime,
+        displayTime: formattedTime,
     }
 }

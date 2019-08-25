@@ -5,6 +5,7 @@ import { ConsultantTypes } from '../consultantTypes';
 import { TimeSlots } from '../timeSlots';
 import { AppointmentTypes } from '../appointmentTypes';
 import { Notes } from '../notes';
+import { BookButton } from '../bookButton'
 
 export const Appointment = () => {
   return (
@@ -17,6 +18,7 @@ export const Appointment = () => {
       <AppointmentTypes></AppointmentTypes>
       <Notes></Notes>
       <LayoutDivider></LayoutDivider>
+      <BookButton></BookButton>
     </>
   )
 }

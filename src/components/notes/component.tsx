@@ -48,4 +48,5 @@ const NotesEditor = styled.textarea`
   height: 200px;
   width: 100%;
   border-radius: 10px;
+  margin-bottom: 100px;
 `

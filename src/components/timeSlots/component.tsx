@@ -19,8 +19,8 @@ export const GET_TIME_SLOTS_QUERY = gql`
 
 interface ITimeSlots {
     consultantType: string
-    selectedTimeSlot: number;
-    setSelected: (timeSlot: number) => () => void;
+    selectedTimeSlot: string;
+    setSelected: (timeSlot: string) => () => void;
 }
 
 export const TimeSlotsUI: React.FC<ITimeSlots> = ({
@@ -42,7 +42,7 @@ export const TimeSlotsUI: React.FC<ITimeSlots> = ({
       <Title>Date & Time</Title>
       <TimeSlotsContainer>
         {availableSlots.map((as: any) => (
-          <TimeSlot key={as.id} onClick={setSelected(as.id)} isSelected={selectedTimeSlot === as.id}>{as.time}</TimeSlot>
+          <TimeSlot key={as.id} onClick={setSelected(as.time)} isSelected={selectedTimeSlot === as.time}>{as.displayTime}</TimeSlot>
         ))}
       </TimeSlotsContainer>
     </>
@@ -50,14 +50,14 @@ export const TimeSlotsUI: React.FC<ITimeSlots> = ({
 }
 
 function mapStateToProps(state: any) {
-  const consultantType = _.get(state, 'consultantType.selected', '');
+  const consultantType = _.get(state, 'consultantType', '');
   const selectedTimeSlot =  _.get(state, 'timeSlot');
   return { consultantType, selectedTimeSlot }
 }
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
     return {
-      setSelected: (timeSlot: number) => () => dispatch(setTimeSlot(timeSlot))
+      setSelected: (timeSlot: string) => () => dispatch(setTimeSlot(timeSlot))
     }
   }
 
