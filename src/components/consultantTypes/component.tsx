@@ -7,6 +7,7 @@ import { Dispatch } from 'redux';
 import { setConsultantType } from './actions';
 import { Title, ConsultantTypesContainer, ConsultantType } from './styled';
 import { clearTimeSlot } from '../timeSlots';
+import { clearAppointmentType } from '../appointmentTypes'
 import { batch } from 'react-redux'
 
 export const GET_CONSULTANT_TYPES_QUERY = gql`
@@ -54,6 +55,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
         batch(() => {
           dispatch(setConsultantType(consultantType));
           dispatch(clearTimeSlot());
+          dispatch(clearAppointmentType());
         })
         
       }

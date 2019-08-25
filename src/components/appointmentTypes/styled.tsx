@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const TimeSlotsContainer = styled.div`
+export const AppointmentTypesContainer = styled.div`
   display: flex;
 `
 
@@ -11,7 +11,8 @@ export const Title = styled.h4`
   margin-bottom: 15px;
 `
 
-export const TimeSlot = styled.div<{isSelected: boolean}>`
+export const AppointmentType = styled.div<{isSelected: boolean}>`
+  height: 30px;
   padding: 5px 10px;
   border: solid 1px ${({isSelected}) => isSelected? '#58bfa9': '#dddddd'}; 
   line-height: 30px;

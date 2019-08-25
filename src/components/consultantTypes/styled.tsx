@@ -11,7 +11,7 @@ export const Title = styled.h4`
   margin-bottom: 15px;
 `
 
-export const ConsultantType = styled.span<{isSelected: boolean}>`
+export const ConsultantType = styled.div<{isSelected: boolean}>`
   height: 30px;
   padding: 5px 10px;
   border: solid 1px ${({isSelected}) => isSelected? '#58bfa9': '#dddddd'}; 

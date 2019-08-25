@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { User } from '../user';
 import { ConsultantTypes } from '../consultantTypes';
 import { TimeSlots } from '../timeSlots';
+import { AppointmentTypes } from '../appointmentTypes';
 
 export const Appointment = () => {
   return (
@@ -12,6 +13,7 @@ export const Appointment = () => {
       <LayoutDivider></LayoutDivider>
       <ConsultantTypes></ConsultantTypes>
       <TimeSlots></TimeSlots>
+      <AppointmentTypes></AppointmentTypes>
       <LayoutDivider></LayoutDivider>
     </>
   )
