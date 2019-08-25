@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { render } from '@testing-library/react'
-import { UserUI, GET_USER_QUERY } from './index'
+import { UserUI, GET_USER_QUERY } from './component'
 import { MockedProvider } from '@apollo/react-testing'
 import wait from 'waait'
 import '@testing-library/jest-dom/extend-expect'
