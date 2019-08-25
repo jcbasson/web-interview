@@ -35,7 +35,7 @@ export const AppointmentTypesUI: React.FC<IAppointmentTypes> = ({
   )
 }
 
-function mapStateToProps(state: any) {
+const mapStateToProps = (state: any) => {
   const appointmentType = _.get(state, 'appointmentType', '');
   const appointmentTypes = [
     "audio",

@@ -4,6 +4,7 @@ import { User } from '../user';
 import { ConsultantTypes } from '../consultantTypes';
 import { TimeSlots } from '../timeSlots';
 import { AppointmentTypes } from '../appointmentTypes';
+import { Notes } from '../notes';
 
 export const Appointment = () => {
   return (
@@ -14,6 +15,7 @@ export const Appointment = () => {
       <ConsultantTypes></ConsultantTypes>
       <TimeSlots></TimeSlots>
       <AppointmentTypes></AppointmentTypes>
+      <Notes></Notes>
       <LayoutDivider></LayoutDivider>
     </>
   )
