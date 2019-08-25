@@ -4,6 +4,8 @@ import gql from 'graphql-tag'
 import { useQuery } from '@apollo/react-hooks'
 import _ from 'lodash'
 import { connect } from 'react-redux'
+import { Dispatch } from 'redux';
+import { setConsultantType } from './actions';
 
 export const GET_CONSULTANT_TYPES_QUERY = gql`
   query ConsultantTypes {
@@ -12,11 +14,13 @@ export const GET_CONSULTANT_TYPES_QUERY = gql`
 `
 
 interface IConsultantTypes {
-  selectedGP: string
+    consultantType: string
+    setSelected: (consultantType: string) => () => void;
 }
 
 export const ConsultantTypesUI: React.FC<IConsultantTypes> = ({
-  selectedGP,
+    consultantType,
+    setSelected,
 }) => {
   const { loading, error, data } = useQuery(GET_CONSULTANT_TYPES_QUERY)
 
@@ -30,8 +34,7 @@ export const ConsultantTypesUI: React.FC<IConsultantTypes> = ({
       <Title>Consultant Type</Title>
       <ConsultantTypesContainer>
         {consultantTypes.map((ct: string) => (
-
-          <ConsultantType isSelected={selectedGP === ct}>{ct === 'gp' ? 'GP' : ct}</ConsultantType>
+          <ConsultantType key={ct} onClick={setSelected(ct)} isSelected={consultantType === ct}>{ct === 'gp' ? 'GP' : ct}</ConsultantType>
         ))}
       </ConsultantTypesContainer>
     </>
@@ -39,11 +42,17 @@ export const ConsultantTypesUI: React.FC<IConsultantTypes> = ({
 }
 
 function mapStateToProps(state: any) {
-  const { selectedGP } = state
-  return { selectedGP }
+  const consultantType = _.get(state, 'consultantType.selected', '');
+  return { consultantType }
 }
 
-export const ConsultantTypes = connect(mapStateToProps)(ConsultantTypesUI)
+const mapDispatchToProps = (dispatch: Dispatch) => {
+    return {
+      setSelected: (consultantType: string) => () => dispatch(setConsultantType(consultantType))
+    }
+  }
+
+export const ConsultantTypes = connect(mapStateToProps, mapDispatchToProps)(ConsultantTypesUI)
 
 const ConsultantTypesContainer = styled.div`
   display: flex;
@@ -69,4 +78,5 @@ const ConsultantType = styled.label<{isSelected: boolean}>`
   text-transform: capitalize;
   color:  ${({isSelected}) => isSelected? 'white': '#353a46'};
   background-color: ${({isSelected}) => isSelected? '#58bfa9': 'white'};
+  cursor: pointer;
 `

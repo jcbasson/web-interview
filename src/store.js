@@ -1,10 +1,6 @@
 import { createStore } from 'redux'
 import rootReducer from './rootReducer'
-
-const defaultStore = {
-  userID: 1,
-  selectedGP: 'gp',
-}
+import { defaultStore } from './components'
 
 const store = createStore(rootReducer, defaultStore)
 
