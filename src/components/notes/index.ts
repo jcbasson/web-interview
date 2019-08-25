@@ -1,7 +1,9 @@
 import { Notes } from './component';
+import { notesReducer } from './reducers';
 
 export {
-    Notes
+    Notes,
+    notesReducer
 }
 
 

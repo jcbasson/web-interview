@@ -2,40 +2,40 @@ import * as React from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
-import _ from 'lodash';
-//import { setNotes } from './actions'
+import _ from 'lodash'
+import { setNotes } from './actions'
 
 interface INotesUI {
-  text: string
+  notes: string
   setNotes: (event: any) => void
 }
-export const NotesUI: React.FC<INotesUI> = ({ text, setNotes }) => {
-         return (
-           <>
-             <Title>Notes</Title>
-             <NotesEditor></NotesEditor>
-           </>
-         )
-       }
+export const NotesUI: React.FC<INotesUI> = ({ notes, setNotes }) => {
+  return (
+    <>
+      <Title>Notes</Title>
+      <NotesEditor onChange={setNotes} value={notes}></NotesEditor>
+    </>
+  )
+}
 
 const mapStateToProps = (state: any) => {
-    const text = _.get(state, 'text', '');
-   
-    return { text }
+  const notes = _.get(state, 'notes', '')
+
+  return { notes }
+}
+
+const mapDispatchToProps = (dispatch: Dispatch) => {
+  return {
+    setNotes: (event: any) => {
+      dispatch(setNotes(event.target.value))
+    },
   }
-  
-  const mapDispatchToProps = (dispatch: Dispatch) => {
-    return {
-      setNotes: (event: any) => {
-          console.log("event = ", event);
-      },
-    }
-  }
-  
-  export const Notes = connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(NotesUI)
+}
+
+export const Notes = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(NotesUI)
 
 export const Title = styled.h4`
   color: #343a46;
