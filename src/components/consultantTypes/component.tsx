@@ -6,6 +6,8 @@ import { connect } from 'react-redux'
 import { Dispatch } from 'redux';
 import { setConsultantType } from './actions';
 import { Title, ConsultantTypesContainer, ConsultantType } from './styled';
+import { clearTimeSlot } from '../timeSlots';
+import { batch } from 'react-redux'
 
 export const GET_CONSULTANT_TYPES_QUERY = gql`
   query ConsultantTypes {
@@ -48,7 +50,13 @@ function mapStateToProps(state: any) {
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
     return {
-      setSelected: (consultantType: string) => () => dispatch(setConsultantType(consultantType))
+      setSelected: (consultantType: string) => () => {
+        batch(() => {
+          dispatch(setConsultantType(consultantType));
+          dispatch(clearTimeSlot());
+        })
+        
+      }
     }
   }
 

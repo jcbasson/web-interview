@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const ConsultantTypesContainer = styled.div`
+export const TimeSlotsContainer = styled.div`
   display: flex;
 `
 
@@ -11,8 +11,7 @@ export const Title = styled.h4`
   margin-bottom: 15px;
 `
 
-export const ConsultantType = styled.span<{isSelected: boolean}>`
-  height: 30px;
+export const TimeSlot = styled.span<{isSelected: boolean}>`
   padding: 5px 10px;
   border: solid 1px ${({isSelected}) => isSelected? '#58bfa9': '#dddddd'}; 
   line-height: 30px;

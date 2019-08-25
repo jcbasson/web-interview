@@ -2,6 +2,7 @@ import * as React from 'react'
 import styled from 'styled-components'
 import { User } from '../user';
 import { ConsultantTypes } from '../consultantTypes';
+import { TimeSlots } from '../timeSlots';
 
 export const Appointment = () => {
   return (
@@ -10,6 +11,7 @@ export const Appointment = () => {
       <User></User>
       <LayoutDivider></LayoutDivider>
       <ConsultantTypes></ConsultantTypes>
+      <TimeSlots></TimeSlots>
       <LayoutDivider></LayoutDivider>
     </>
   )
