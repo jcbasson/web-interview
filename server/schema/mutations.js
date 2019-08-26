@@ -8,7 +8,6 @@ const {
 } = graphql
 const _ = require('lodash')
 const httpService = require('../service/httpService')
-const availableSlotUtils = require('../utils/availableSlotUtils')
 
 const AppointmentType = new GraphQLObjectType({
   name: 'Appointments',
@@ -30,7 +29,7 @@ const mutation = new GraphQLObjectType({
     bookAppointment: {
       type: AppointmentType,
       args: {
-        notes: { type: new GraphQLNonNull(GraphQLString) },
+        notes: { type: GraphQLString },
         userId: { type: new GraphQLNonNull(GraphQLInt) },
         consultantType: { type: new GraphQLNonNull(GraphQLString) },
         appointmentType: {

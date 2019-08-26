@@ -4,6 +4,16 @@ import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
 import { BookButtonTypes } from './types'
 import { getBookingData, isBookingAvailable } from './utils'
+import gql from 'graphql-tag';
+import { useMutation } from '@apollo/react-hooks';
+
+const BOOK_APPOINTMENT = gql`
+    mutation BookAppointment($notes: String, $userId: Int!, $consultantType: String!, $appointmentType: [String]!, $time: String!){
+        bookAppointment(notes: $notes, userId: $userId, consultantType: $consultantType, appointmentType: $appointmentType, time: $time) {
+            id
+        }
+    }
+`;
 
 export const BookButtonUI: React.FC<BookButtonTypes.UI.IBookButton> = ({
   isAvailable,

@@ -14,10 +14,11 @@ describe('bookingButton/utils', () => {
       const result = getBooking(mockState)
 
       expect(result).toEqual({
-        type: 'gp',
-        dateTime: '2019-11-27T10:11:00.000Z',
+        consultantType: 'gp',
+        time: '2019-11-27T10:11:00.000Z',
         userId: 1,
         notes: 'Test text for notes',
+        appointmentType: ['video'],
       })
     })
   })
@@ -25,10 +26,11 @@ describe('bookingButton/utils', () => {
   describe('isBookingAvailable', () => {
     it('should return false if user id is empty', () => {
       const mockBookingData = {
-        type: 'gp',
-        dateTime: '2019-11-27T10:11:00.000Z',
+        consultantType: 'gp',
+        time: '2019-11-27T10:11:00.000Z',
         userId: null,
         notes: 'Test text for notes',
+        appointmentType: ['video'],
       }
 
       const result = isBookingAvailable(mockBookingData)
@@ -38,10 +40,11 @@ describe('bookingButton/utils', () => {
 
     it('should return false if consultant type is not selected', () => {
       const mockBookingData = {
-        type: null,
-        dateTime: '2019-11-27T10:11:00.000Z',
+        consultantType: null,
+        time: '2019-11-27T10:11:00.000Z',
         userId: 1,
         notes: 'Test text for notes',
+        appointmentType: ['video'],
       }
 
       const result = isBookingAvailable(mockBookingData)
@@ -51,10 +54,25 @@ describe('bookingButton/utils', () => {
 
     it('should return false if date time is not selected', () => {
       const mockBookingData = {
-        type: 'gp',
-        dateTime: null,
+        consultantType: 'gp',
+        time: null,
         userId: 1,
         notes: 'Test text for notes',
+        appointmentType: ['video'],
+      }
+
+      const result = isBookingAvailable(mockBookingData)
+
+      expect(result).toEqual(false)
+    })
+
+    it('should return false if no appointment types were selected', () => {
+      const mockBookingData = {
+        consultantType: 'gp',
+        time: null,
+        userId: 1,
+        notes: 'Test text for notes',
+        appointmentType: [],
       }
 
       const result = isBookingAvailable(mockBookingData)
@@ -64,10 +82,11 @@ describe('bookingButton/utils', () => {
 
     it('should return true if user id, consultant type, and date time are not empty', () => {
       const mockBookingData = {
-        type: 'gp',
-        dateTime: '2019-11-27T10:11:00.000Z',
+        consultantType: 'gp',
+        time: '2019-11-27T10:11:00.000Z',
         userId: 1,
         notes: 'Test text for notes',
+        appointmentType: ['video'],
       }
 
       const result = isBookingAvailable(mockBookingData)

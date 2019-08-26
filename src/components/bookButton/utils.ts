@@ -4,28 +4,31 @@ import { BookButtonTypes } from './types'
 
 export const getBookingData = () => {
   return createSelector(
-    [getUserId, getDateTime, getNotes, getType],
+    [getUserId, getDateTime, getNotes, getType, getAppointmentType],
     getBooking
   )
 }
 
 const getBooking: BookButtonTypes.Utils.GetBookingData = (
   userId,
-  dateTime,
+  time,
   notes,
-  type
+  consultantType,
+  appointmentType,
 ) => ({
   userId,
-  dateTime,
+  time,
   notes,
-  type,
+  consultantType,
+  appointmentType,
 })
 
 export const isBookingAvailable: BookButtonTypes.Utils.isBookingAvailable = bookingData => {
   return (
     !_.isNil(_.get(bookingData, 'userId')) &&
-    !_.isNil(_.get(bookingData, 'dateTime')) &&
-    !_.isNil(_.get(bookingData, 'type'))
+    !_.isNil(_.get(bookingData, 'time')) &&
+    !_.isNil(_.get(bookingData, 'consultantType')) &&
+    !_.isEmpty(_.get(bookingData, 'appointmentType'))
   )
 }
 
@@ -41,6 +44,10 @@ const getNotes: BookButtonTypes.Utils.GetNotes = state => {
   return _.get(state, 'notes')
 }
 
-const getType: BookButtonTypes.Utils.GetNotes = state => {
+const getType: BookButtonTypes.Utils.GetConsultantType = state => {
   return _.get(state, 'consultantType')
+}
+
+const getAppointmentType: BookButtonTypes.Utils.GetAppointmentType = state => {
+    return _.get(state, 'appointmentType', [])
 }

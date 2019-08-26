@@ -4,15 +4,16 @@ export namespace BookButtonTypes {
 
         export interface IBookingData {
             readonly userId: number;
-            readonly dateTime: string;
+            readonly time: string;
             readonly notes?: string;
-            readonly type: string;
+            readonly consultantType: string;
+            readonly appointmentType: string[]
         }
     }
 
     export namespace Utils {
 
-        export type GetBookingData = (userId: number, dateTime: string, notes: string, type: string) => Data.IBookingData;
+        export type GetBookingData = (userId: number, time: string, notes: string, consultantType: string, appointmentType: string[]) => Data.IBookingData;
 
         export type isBookingAvailable = (bookingData: Data.IBookingData) => boolean;
 
@@ -22,7 +23,9 @@ export namespace BookButtonTypes {
 
         export type GetNotes = (state: any) => string;
 
-        export type GetType = (state: any) => string;
+        export type GetConsultantType = (state: any) => string;
+
+        export type GetAppointmentType = (state: any) => string[];
     }
 
     export namespace UI {
