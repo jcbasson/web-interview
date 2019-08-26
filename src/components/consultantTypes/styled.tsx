@@ -9,6 +9,7 @@ export const Title = styled.h4`
   font-weight: bold;
   font-size: 20px;
   margin-bottom: 15px;
+  font-family: sans-serif;
 `
 
 export const ConsultantType = styled.div<{isSelected: boolean}>`
@@ -25,4 +26,9 @@ export const ConsultantType = styled.div<{isSelected: boolean}>`
   color:  ${({isSelected}) => isSelected? 'white': '#353a46'};
   background-color: ${({isSelected}) => isSelected? '#58bfa9': 'white'};
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  -moz-tap-highlight-color: transparent;
+  -o-tap-highlight-color: transparent;
+  tap-highlight-color: transparent;
+  font-family: sans-serif;
 `

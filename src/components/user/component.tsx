@@ -58,4 +58,5 @@ const AvatarImg = styled.img`
 const Name = styled.label`
     color: #343a46;
     font-weight: bold;
+    font-family: sans-serif;
 `

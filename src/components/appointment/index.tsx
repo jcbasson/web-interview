@@ -25,6 +25,7 @@ export const Appointment = () => {
 
 const SubHeader = styled.h2`
   font-size: 30px;
+  font-family: sans-serif;
 `
 
 const LayoutDivider = styled.hr`

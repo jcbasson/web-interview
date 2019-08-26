@@ -5,11 +5,15 @@ import { ApolloProvider } from '@apollo/react-hooks'
 import 'normalize.css'
 import { App } from './components'
 import registerServiceWorker from './registerServiceWorker'
-import { Provider } from 'react-redux';
-import store from './store';
+import { Provider } from 'react-redux'
+import store from './store'
 
 const client = new ApolloClient({
   uri: 'http://localhost:4000/graphql',
+  onError: errors => {
+    /*TODO: Do logging of different error types*/
+    console.log(errors);
+  },
 })
 
 const Root = () => {

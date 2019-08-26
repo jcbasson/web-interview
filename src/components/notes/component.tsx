@@ -20,7 +20,6 @@ export const NotesUI: React.FC<INotesUI> = ({ notes, setNotes }) => {
 
 const mapStateToProps = (state: any) => {
   const notes = _.get(state, 'notes', '')
-
   return { notes }
 }
 
@@ -42,6 +41,7 @@ export const Title = styled.h4`
   font-weight: bold;
   font-size: 20px;
   margin-bottom: 15px;
+  font-family: sans-serif;
 `
 
 const NotesEditor = styled.textarea`
@@ -49,4 +49,5 @@ const NotesEditor = styled.textarea`
   width: 100%;
   border-radius: 10px;
   margin-bottom: 100px;
+  font-family: sans-serif;
 `

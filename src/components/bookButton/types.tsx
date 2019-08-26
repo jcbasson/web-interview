@@ -33,7 +33,7 @@ export namespace BookButtonTypes {
         export interface IBookButton{
             isAvailable: boolean;
             bookingData: Data.IBookingData;
-            clickHandler: (bookingData: Data.IBookingData) => () => void;
+            clickHandler: (bookAppointment: Function, bookingData: Data.IBookingData) => () => void;
         }
     }
 }

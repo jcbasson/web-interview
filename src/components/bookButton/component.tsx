@@ -1,34 +1,56 @@
 import * as React from 'react'
 import styled from 'styled-components'
-import { connect } from 'react-redux'
+import { connect, batch } from 'react-redux'
 import { Dispatch } from 'redux'
 import { BookButtonTypes } from './types'
 import { getBookingData, isBookingAvailable } from './utils'
-import gql from 'graphql-tag';
-import { useMutation } from '@apollo/react-hooks';
+import gql from 'graphql-tag'
+import { useMutation } from '@apollo/react-hooks'
+import { requestBooking, bookingCompleted } from './actions'
+import { clearTimeSlot } from '../timeSlots'
+import { clearAppointmentType } from '../appointmentTypes'
+import { clearNotes } from '../notes';
 
 const BOOK_APPOINTMENT = gql`
-    mutation BookAppointment($notes: String, $userId: Int!, $consultantType: String!, $appointmentType: [String]!, $time: String!){
-        bookAppointment(notes: $notes, userId: $userId, consultantType: $consultantType, appointmentType: $appointmentType, time: $time) {
-            id
-        }
+  mutation BookAppointment(
+    $notes: String
+    $userId: Int!
+    $consultantType: String!
+    $appointmentType: [String]!
+    $time: String!
+  ) {
+    bookAppointment(
+      notes: $notes
+      userId: $userId
+      consultantType: $consultantType
+      appointmentType: $appointmentType
+      time: $time
+    ) {
+      id
     }
-`;
+  }
+`
 
 export const BookButtonUI: React.FC<BookButtonTypes.UI.IBookButton> = ({
   isAvailable,
   clickHandler,
   bookingData,
 }) => {
+  const [bookAppointment, { data }] = useMutation(BOOK_APPOINTMENT)
   return isAvailable ? (
     <>
-      <BookAppointmentButton onClick={clickHandler(bookingData)}>
+      <BookAppointmentButton
+        onClick={clickHandler(bookAppointment, bookingData)}
+      >
         Book
       </BookAppointmentButton>
     </>
   ) : (
     <>
-      <BookAppointmentButton disabled onClick={clickHandler(bookingData)}>
+      <BookAppointmentButton
+        disabled
+        onClick={clickHandler(bookAppointment, bookingData)}
+      >
         Book
       </BookAppointmentButton>
     </>
@@ -37,9 +59,6 @@ export const BookButtonUI: React.FC<BookButtonTypes.UI.IBookButton> = ({
 
 const BookAppointmentButton = styled.button`
   padding: 0;
-  border: none;
-  font: inherit;
-  color: inherit;
   background-color: transparent;
   cursor: pointer;
   background-color: #58bfa9;
@@ -50,6 +69,7 @@ const BookAppointmentButton = styled.button`
   border: none;
   margin-top: 15px;
   outline: none;
+  font-family: sans-serif;
 `
 
 const makeMapStateToProps = () => {
@@ -66,8 +86,25 @@ const makeMapStateToProps = () => {
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
-    clickHandler: (bookingData: BookButtonTypes.Data.IBookingData) => () => {
-      console.log('bookingData = ', bookingData)
+    clickHandler: (
+      bookAppointment: Function,
+      bookingData: BookButtonTypes.Data.IBookingData
+    ) => () => {
+      dispatch(requestBooking())
+      bookAppointment({
+        variables: { ...bookingData },
+        update: (cache: any, data: any) => {
+          if (data) {
+            batch(() => {
+              dispatch(clearTimeSlot())
+              dispatch(clearAppointmentType())
+              dispatch(clearNotes())
+              dispatch(bookingCompleted())
+            })
+           
+          }
+        },
+      })
     },
   }
 }

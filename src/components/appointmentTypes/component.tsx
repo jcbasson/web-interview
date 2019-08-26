@@ -19,7 +19,7 @@ export const AppointmentTypesUI: React.FC<IAppointmentTypes> = ({
   
   return (
     <>
-      <Title>Consultant Type</Title>
+      <Title>Appointment Type</Title>
       <AppointmentTypesContainer>
         {appointmentTypeOptions.map((at: string) => (
           <AppointmentType
