@@ -1,6 +1,6 @@
 
 
-export namespace TimeSlots {
+export namespace TimeSlotsTypes {
 
     export namespace Data {
 
@@ -17,5 +17,14 @@ export namespace TimeSlots {
         export type FormatTimeSlotTimes = (timeSlots: Data.TimeSlot[]) => Data.TimeSlot[];
 
         export type FormatTime = (timeSlot: Data.TimeSlot) => Data.TimeSlot;
+    }
+
+    export namespace UI {
+        export interface ITimeSlots {
+            consultantType: string
+            selectedTimeSlot: string;
+            setSelected: (timeSlot: string) => () => void;
+        }
+        
     }
 }

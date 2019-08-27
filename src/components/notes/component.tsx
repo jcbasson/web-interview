@@ -50,4 +50,5 @@ const NotesEditor = styled.textarea`
   border-radius: 10px;
   margin-bottom: 100px;
   font-family: sans-serif;
+  outline: none;
 `

@@ -1,4 +1,3 @@
-import _ from 'lodash'
 import { BOOKING_REQUESTED, BOOKING_COMPLETED } from './actions'
 
 export const bookingsReducer = (state = [], action) => {

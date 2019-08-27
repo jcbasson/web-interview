@@ -70,6 +70,10 @@ const BookAppointmentButton = styled.button`
   margin-top: 15px;
   outline: none;
   font-family: sans-serif;
+  
+  &:disabled {
+      opacity: .5;
+  }
 `
 
 const makeMapStateToProps = () => {

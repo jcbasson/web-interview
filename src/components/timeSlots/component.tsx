@@ -7,6 +7,7 @@ import { Dispatch } from 'redux';
 import { setTimeSlot } from './actions';
 import { Title, TimeSlotsContainer, TimeSlot } from './styled';
 import { formatTimeSlotTimes } from './utils';
+import { TimeSlotsTypes } from './types';
 
 export const GET_TIME_SLOTS_QUERY = gql`
   query AvailableSlots($consultantType: String!){
@@ -16,14 +17,7 @@ export const GET_TIME_SLOTS_QUERY = gql`
     }
   }
 `
-
-interface ITimeSlots {
-    consultantType: string
-    selectedTimeSlot: string;
-    setSelected: (timeSlot: string) => () => void;
-}
-
-export const TimeSlotsUI: React.FC<ITimeSlots> = ({
+export const TimeSlotsUI: React.FC<TimeSlotsTypes.UI.ITimeSlots> = ({
     consultantType,
     setSelected,
     selectedTimeSlot
